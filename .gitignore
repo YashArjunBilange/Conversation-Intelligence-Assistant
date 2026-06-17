@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.pyc
+
+# Environment
+.env
+
+# ChromaDB
+chroma_db/
+
+# Embeddings
+*.npy
+
+# OS
+.DS_Store
+Thumbs.db
