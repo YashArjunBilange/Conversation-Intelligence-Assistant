@@ -19,7 +19,21 @@ CHROMA_PATH = BASE_DIR / "chroma_db"
 
 load_dotenv(BASE_DIR / ".env")
 
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+
+@lru_cache(maxsize=1)
+def get_gemini_api_key() -> str | None:
+    try:
+        import streamlit as st
+
+        if "GEMINI_API_KEY" in st.secrets:
+            return st.secrets["GEMINI_API_KEY"]
+    except Exception:
+        pass
+
+    return os.getenv("GEMINI_API_KEY")
+
+
+GEMINI_API_KEY = get_gemini_api_key()
 if GEMINI_API_KEY:
     genai.configure(api_key=GEMINI_API_KEY)
 
@@ -38,8 +52,11 @@ def get_embedding_model() -> SentenceTransformer:
 
 @lru_cache(maxsize=1)
 def get_generative_model():
-    if not GEMINI_API_KEY:
+    api_key = get_gemini_api_key()
+    if not api_key:
         return None
+
+    genai.configure(api_key=api_key)
     return genai.GenerativeModel("gemini-2.5-flash")
 
 
@@ -148,7 +165,7 @@ def ask_question(query: str) -> str:
     if not query:
         return "Please enter a question before asking for an answer."
 
-    if not GEMINI_API_KEY:
+    if not get_gemini_api_key():
         return "Set GEMINI_API_KEY in the Streamlit secrets or environment before using the app."
 
     try:
