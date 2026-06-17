@@ -16,8 +16,6 @@ with st.spinner("Preparing the conversation index..."):
     ensure_runtime_ready()
 
 with st.sidebar:
-    st.write("The app rebuilds its vector store from topics.json and message_chunks.json when needed.")
-
     if st.button("Clear chat"):
         st.session_state.messages = []
         st.rerun()
