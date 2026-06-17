@@ -1,6 +1,6 @@
 import streamlit as st
 
-from rag_chatbot import ask_question
+from rag_chatbot import ask_question, ensure_runtime_ready
 
 
 st.set_page_config(
@@ -11,6 +11,9 @@ st.set_page_config(
 
 st.title("Conversation Intelligence Assistant")
 st.caption("Ask a question and the app will retrieve supporting evidence before answering.")
+
+with st.spinner("Preparing the conversation index..."):
+    ensure_runtime_ready()
 
 with st.sidebar:
     st.write("The app rebuilds its vector store from topics.json and message_chunks.json when needed.")

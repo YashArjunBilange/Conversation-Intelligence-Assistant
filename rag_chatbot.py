@@ -75,6 +75,19 @@ def load_chunks() -> list[dict]:
     return json.loads(CHUNKS_PATH.read_text(encoding="utf-8"))
 
 
+def ensure_vector_store() -> None:
+    """Build the local Chroma collections once if they are missing or incomplete."""
+    _populate_topics_collection()
+    _populate_chunks_collection()
+
+
+def ensure_runtime_ready() -> None:
+    """Warm the embedding and Gemini clients so the first question is responsive."""
+    get_embedding_model()
+    get_generative_model()
+    ensure_vector_store()
+
+
 def _reset_collection(name: str):
     client = get_chroma_client()
     try:
@@ -169,6 +182,8 @@ def ask_question(query: str) -> str:
         return "Set GEMINI_API_KEY in the Streamlit secrets or environment before using the app."
 
     try:
+        ensure_runtime_ready()
+
         query_embedding = _encode_texts([query])
 
         topic_results = get_topic_collection().query(
