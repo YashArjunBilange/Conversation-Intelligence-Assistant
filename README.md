@@ -272,7 +272,7 @@ The chatbot no longer depends on committed ChromaDB binaries or `.npy` embedding
 
 Streamlit URL:
 
-<ADD_YOUR_STREAMLIT_URL>
+https://conversation-intelligence-assistant-eyh4ltknkr5dpsgwemczvh.streamlit.app/
 
 ---
 
@@ -280,7 +280,7 @@ Streamlit URL:
 
 Loom Video:
 
-<ADD_YOUR_LOOM_LINK>
+ https://www.loom.com/share/5e5f9919e8ba40a9a0357ee7b1c5818f
 
 ---
 
