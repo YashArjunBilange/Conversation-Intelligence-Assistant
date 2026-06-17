@@ -9,3 +9,4 @@ python-dotenv
 torch
 transformers
 huggingface-hub
+torchvision
