@@ -5,6 +5,9 @@ __pycache__/
 # Environment
 .env
 
+#ChromaDB
+chroma_db/
+
 # Embeddings
 *.npy
 
