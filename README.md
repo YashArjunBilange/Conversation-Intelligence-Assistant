@@ -258,6 +258,16 @@ http://localhost:8501
 
 ---
 
+## Streamlit Cloud Deployment
+
+This project is ready to deploy on Streamlit Community Cloud with `app.py` as the entry point.
+
+Before deploying, add `GEMINI_API_KEY` in Streamlit secrets or the app environment.
+
+The chatbot no longer depends on committed ChromaDB binaries or `.npy` embedding files. If the vector store is empty, it will rebuild it from the tracked JSON sources on first run.
+
+---
+
 # Hosted Demo
 
 Streamlit URL:
